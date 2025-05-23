@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancel Leave Request</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ffe0b2, #fffde7);
+            padding: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            background-color: white;
+            border-left: 6px solid #f44336;
+        }
+        h2 {
+            color: #d32f2f;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .btn-danger {
+            background-color: #d32f2f;
+            border-color: #d32f2f;
+        }
+        .btn-danger:hover {
+            background-color: #b71c1c;
+        }
+        .btn-secondary {
+            background-color: #757575;
+            border-color: #757575;
+        }
+        .btn-secondary:hover {
+            background-color: #616161;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Cancel Leave Request</h2>
+
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <p class="fs-5 text-center">
+        Are you sure you want to cancel the leave from <strong>{{ leave_request.start_date }}</strong> to <strong>{{ leave_request.end_date }}</strong>?
+    </p>
+
+    <form method="post" class="d-flex justify-content-center gap-3 mt-4">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger px-4">Yes, Cancel</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary px-4">No, Go Back</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
